@@ -10,23 +10,47 @@ def df(x):
 # Newton-Raphson method
 def newton_raphson(x0, tolerance=1e-6, max_iterations=1000):
     xn = x0
+    x_vals.append(float(x0))
     for n in range(max_iterations):
-        x_vals.append(float(xn))
-        
-        if abs(f(xn)) < tolerance:
+        xnew = xn - f(xn) / df(xn)
+        x_vals.append(float(xnew))
+        if abs(f(xn)) <= tolerance:
             return xn, n+1  # Return root and number of iterations
-        xn = xn - f(xn) / df(xn)
+        xn = xnew
     return None, max_iterations  # Did not converge
 
 x0 = -1.6
 x_vals = []
 root, iterations = newton_raphson(x0)
 if root is not None:
-    print(f"Newton-Raphson method: Root found at x = {root:.6f} after {iterations} iterations")
+    print(f"Newton-Raphson method: Root found at x = {root:.12f} after {iterations} iterations")
 else:
     print("Newton-Raphson method did not converge")
 
 A1 = x_vals
+print(len(A1))
+print(iterations)
+# Newton-Raphson method Initial procedure
+#def newton_raphson(x0, tolerance=1e-6, max_iterations=1000):
+    #xn = x0
+    #x_vals.append(flaot(x0))
+    #for n in range(max_iterations):
+       # x_vals.append(float(xn))
+        
+        #if abs(f(xn)) <= tolerance:
+            #return xn, n+1  # Return root and number of iterations
+       # xn = xn - f(xn) / df(xn)
+    #eturn None, max_iterations  # Did not converge
+
+#x0 = -1.6
+#x_vals = []
+#root, iterations = newton_raphson(x0)
+#if root is not None:
+    #print(f"Newton-Raphson method: Root found at x = {root:.12f} after {iterations} iterations")
+#else:
+    #print("Newton-Raphson method did not converge")
+
+#A1 = x_vals
 
 #Bisection Method
 
@@ -55,7 +79,8 @@ print(f"Bisection method: Root found at x = {rootB:.6f} after {iterationsB} iter
 A2 = bisection_x
 
 A3 = [iterations,iterationsB]
-
+print(len(A2))
+print(iterationsB)
 import numpy as np
 
 # Define the matrices and vectors
@@ -69,15 +94,15 @@ z = np.array([[1], [2], [-1]])
 
 A4 = A + B
 
-A5 = (3 * x) - (4 * y)
+A5 = (np.transpose((3 * x) - (4 * y))).flatten()
 
-A6 = A @ x
+A6 = (np.transpose(A @ x)).flatten()
 
-A7 = B @ (x - y)
+A7 =(np.transpose(B @ (x - y))).flatten()
 
-A8 = D @ x
+A8= (np.transpose(D @ x)).flatten()
 
-A9 = (D @ y) + z
+A9 = (np.transpose((D @ y) + z)).flatten()
 
 A10 = A @ B
 
